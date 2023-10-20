@@ -65,24 +65,24 @@ class RgbRPCService(RgbServiceBase, ResourceRPCServiceBase):
         request = await stream.recv_message()
         assert request is not None
         name = request.name
-        service = self.get_resource(name)
-        resp = await service.animate()
+        rgb = self.get_resource(name)
+        resp = await rgb.animate()
         await stream.send_message(AnimateResponse(text=resp))
 
     async def Clear(self, stream: Stream[ClearRequest, ClearResponse]) -> None:
         request = await stream.recv_message()
         assert request is not None
         name = request.name
-        service = self.get_resource(name)
-        resp = await service.animate()
+        rgb = self.get_resource(name)
+        resp = await rgb.clear()
         await stream.send_message(ClearResponse(text=resp))
 
     async def Stop(self, stream: Stream[StopRequest, StopResponse]) -> None:
         request = await stream.recv_message()
         assert request is not None
         name = request.name
-        service = self.get_resource(name)
-        resp = await service.animate()
+        rgb = self.get_resource(name)
+        resp = await rgb.stop()
         await stream.send_message(StopResponse(text=resp))
 
 class RgbClient(Rgb):
