@@ -21,7 +21,7 @@ To see the custom implementation of this components, see the ws2801.py file.
 """
 
 import abc
-from typing import Final
+from typing import Final, Mapping
 
 from grpclib.client import Channel
 from grpclib.server import Stream
@@ -29,6 +29,8 @@ from grpclib.server import Stream
 from viam.resource.rpc_service_base import ResourceRPCServiceBase
 from viam.resource.types import Subtype, RESOURCE_TYPE_COMPONENT
 from viam.components.component_base import ComponentBase
+from viam.components.generic.client import do_command
+from viam.utils import ValueTypes
 
 from .proto.rgb_grpc import RgbServiceBase, RgbServiceStub
 from .proto.rgb_pb2 import (
@@ -107,3 +109,6 @@ class RgbClient(Rgb):
         request = StopRequest(name=self.name)
         response: StopResponse = await self.client.Stop(request)
         return response.text
+
+    async def do_command(self, command: Mapping[str, ValueTypes], *, timeout: Optional[float] = None) -> Mapping[str, ValueTypes]:
+        return await do_command(self.channel, self.name, command, timeout=timeout)
