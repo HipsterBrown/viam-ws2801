@@ -1,0 +1,13 @@
+{
+  "module_id": "hipsterbrown:ws2801",
+  "visibility": "public",
+  "url": "https://github.com/hipsterbrown/viam-ws2801",
+  "description": "A custom modular component to control ws2801 addressable RGB LEDs.",
+  "models": [
+    {
+      "api": "hipsterbrown:component:rgb",
+      "model": "hipsterbrown:led:ws2801"
+    }
+  ],
+  "entrypoint": "run.sh"
+}
