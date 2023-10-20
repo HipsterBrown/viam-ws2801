@@ -21,7 +21,7 @@ To see the custom implementation of this components, see the ws2801.py file.
 """
 
 import abc
-from typing import Final, Mapping
+from typing import Final, Mapping, Optional
 
 from grpclib.client import Channel
 from grpclib.server import Stream
