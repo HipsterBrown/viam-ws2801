@@ -1,9 +1,8 @@
 import asyncio
 import sys
 
-from viam.components.rgb import Rgb
 from viam.module.module import Module
-from .ws2801 import ws2801
+from .rgb import Rgb, ws2801
 
 async def main(address: str):
     """This function creates and starts a new module, after adding all desired resources.
