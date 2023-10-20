@@ -31,14 +31,17 @@ from viam.resource.types import Subtype, RESOURCE_TYPE_COMPONENT
 from viam.components.component_base import ComponentBase
 
 from .proto.rgb_grpc import RgbServiceBase, RgbServiceStub
-
-# update the below with actual methods for your API!
-from .proto.rgb_pb2 import AnimateRequest, AnimateResponse, ClearRequest, ClearResponse, StopRequest, StopResponse
+from .proto.rgb_pb2 import (
+    AnimateRequest,
+    AnimateResponse,
+    ClearRequest,
+    ClearResponse,
+    StopRequest,
+    StopResponse,
+)
 
 
 class Rgb(ComponentBase):
-    """Example service to use with the example module"""
-
     SUBTYPE: Final = Subtype("hipsterbrown", RESOURCE_TYPE_COMPONENT, "rgb")
 
     @abc.abstractmethod

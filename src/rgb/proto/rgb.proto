@@ -1,25 +1,25 @@
 syntax = "proto3";
 
-package hipsterbrown.components.rgb.v1;
+package hipsterbrown.component.rgb.v1;
 
 import "google/api/annotations.proto";
 
 service RgbService {
   rpc Animate(AnimateRequest) returns (AnimateResponse) {
     option (google.api.http) = {
-      post: "/acme/api/v1/service/rgb/{name}/animate"
+      post: "/hipsterbrown/api/v1/component/rgb/{name}/animate"
     };
   }
 
   rpc Clear(ClearRequest) returns (ClearResponse) {
     option (google.api.http) = {
-      post: "/acme/api/v1/service/rgb/{name}/clear"
+      post: "/hipsterbrown/api/v1/component/rgb/{name}/clear"
     };
   }
 
   rpc Stop(StopRequest) returns (StopResponse) {
     option (google.api.http) = {
-      post: "/acme/api/v1/service/rgb/{name}/stop"
+      post: "/hipsterbrown/api/v1/component/rgb/{name}/stop"
     };
   }
 }

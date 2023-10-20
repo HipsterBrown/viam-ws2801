@@ -29,19 +29,19 @@ class RgbServiceBase(abc.ABC):
 
     def __mapping__(self) -> typing.Dict[str, grpclib.const.Handler]:
         return {
-            '/hipsterbrown.components.rgb.v1.RgbService/Animate': grpclib.const.Handler(
+            '/hipsterbrown.component.rgb.v1.RgbService/Animate': grpclib.const.Handler(
                 self.Animate,
                 grpclib.const.Cardinality.UNARY_UNARY,
                 rgb_pb2.AnimateRequest,
                 rgb_pb2.AnimateResponse,
             ),
-            '/hipsterbrown.components.rgb.v1.RgbService/Clear': grpclib.const.Handler(
+            '/hipsterbrown.component.rgb.v1.RgbService/Clear': grpclib.const.Handler(
                 self.Clear,
                 grpclib.const.Cardinality.UNARY_UNARY,
                 rgb_pb2.ClearRequest,
                 rgb_pb2.ClearResponse,
             ),
-            '/hipsterbrown.components.rgb.v1.RgbService/Stop': grpclib.const.Handler(
+            '/hipsterbrown.component.rgb.v1.RgbService/Stop': grpclib.const.Handler(
                 self.Stop,
                 grpclib.const.Cardinality.UNARY_UNARY,
                 rgb_pb2.StopRequest,
@@ -55,19 +55,19 @@ class RgbServiceStub:
     def __init__(self, channel: grpclib.client.Channel) -> None:
         self.Animate = grpclib.client.UnaryUnaryMethod(
             channel,
-            '/hipsterbrown.components.rgb.v1.RgbService/Animate',
+            '/hipsterbrown.component.rgb.v1.RgbService/Animate',
             rgb_pb2.AnimateRequest,
             rgb_pb2.AnimateResponse,
         )
         self.Clear = grpclib.client.UnaryUnaryMethod(
             channel,
-            '/hipsterbrown.components.rgb.v1.RgbService/Clear',
+            '/hipsterbrown.component.rgb.v1.RgbService/Clear',
             rgb_pb2.ClearRequest,
             rgb_pb2.ClearResponse,
         )
         self.Stop = grpclib.client.UnaryUnaryMethod(
             channel,
-            '/hipsterbrown.components.rgb.v1.RgbService/Stop',
+            '/hipsterbrown.component.rgb.v1.RgbService/Stop',
             rgb_pb2.StopRequest,
             rgb_pb2.StopResponse,
         )

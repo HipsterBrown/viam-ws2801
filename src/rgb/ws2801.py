@@ -53,7 +53,7 @@ class ws2801(Rgb, Reconfigurable):
         if isinstance(default_brightness, float) and (default_brightness > 1.0 or default_brightness < 0.0):
             raise Exception("default_brightness must be between 0.0 and 1.0")
 
-        return
+        return []
 
     # Handles attribute reconfiguration
     def reconfigure(self, config: ComponentConfig, dependencies: Mapping[ResourceName, ResourceBase]):
@@ -87,6 +87,9 @@ class ws2801(Rgb, Reconfigurable):
     async def stop(self) -> str:
         self.animating = False
         return "Ok"
+
+    def close(self):
+        self.controller.deinit()
 
     def _random_color(self) -> int:
         return random.randrange(0, 7) * 32
