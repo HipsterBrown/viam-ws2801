@@ -1,12 +1,17 @@
 [project]
 name = "ws2801"
-version = "0.0.6"
+version = "0.0.7"
 authors = [
   { name="Hipsterbrown", email="headhipster@hipsterbrown.com" },
 ]
 description = "A Viam module component to control ws2801 addressable RGB LEDs"
 readme = "README.md"
 requires-python = ">=3.7"
+dependencies = [
+  "adafruit-circuitpython-ws2801",
+  "RPI.GPIO",
+  "viam-sdk",
+]
 
 [project.urls]
 "Homepage" = "https://github.com/hipsterbrown/viam-ws2801"
