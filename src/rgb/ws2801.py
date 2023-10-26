@@ -99,6 +99,11 @@ class ws2801(Rgb, Reconfigurable):
 
         return "Ok"
 
+    async def fill(self, red: int, green: int, blue: int) -> str:
+        self.controller.fill((red, green, blue))
+        self.controller.show()
+        return "Ok"
+
     async def clear(self) -> str:
         self.controller.fill((0, 0, 0))
         self.controller.show()

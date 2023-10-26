@@ -6,6 +6,7 @@ import typing
 
 import grpclib.const
 import grpclib.client
+
 if typing.TYPE_CHECKING:
     import grpclib.server
 
@@ -14,34 +15,53 @@ from . import rgb_pb2
 
 
 class RgbServiceBase(abc.ABC):
-
     @abc.abstractmethod
-    async def Animate(self, stream: 'grpclib.server.Stream[rgb_pb2.AnimateRequest, rgb_pb2.AnimateResponse]') -> None:
+    async def Animate(
+        self,
+        stream: "grpclib.server.Stream[rgb_pb2.AnimateRequest, rgb_pb2.AnimateResponse]",
+    ) -> None:
         pass
 
     @abc.abstractmethod
-    async def Clear(self, stream: 'grpclib.server.Stream[rgb_pb2.ClearRequest, rgb_pb2.ClearResponse]') -> None:
+    async def Fill(
+        self, stream: "grpclib.server.Stream[rgb_pb2.FillRequest, rgb_pb2.FillResponse]"
+    ) -> None:
         pass
 
     @abc.abstractmethod
-    async def Stop(self, stream: 'grpclib.server.Stream[rgb_pb2.StopRequest, rgb_pb2.StopResponse]') -> None:
+    async def Clear(
+        self,
+        stream: "grpclib.server.Stream[rgb_pb2.ClearRequest, rgb_pb2.ClearResponse]",
+    ) -> None:
+        pass
+
+    @abc.abstractmethod
+    async def Stop(
+        self, stream: "grpclib.server.Stream[rgb_pb2.StopRequest, rgb_pb2.StopResponse]"
+    ) -> None:
         pass
 
     def __mapping__(self) -> typing.Dict[str, grpclib.const.Handler]:
         return {
-            '/hipsterbrown.component.rgb.v1.RgbService/Animate': grpclib.const.Handler(
+            "/hipsterbrown.component.rgb.v1.RgbService/Animate": grpclib.const.Handler(
                 self.Animate,
                 grpclib.const.Cardinality.UNARY_UNARY,
                 rgb_pb2.AnimateRequest,
                 rgb_pb2.AnimateResponse,
             ),
-            '/hipsterbrown.component.rgb.v1.RgbService/Clear': grpclib.const.Handler(
+            "/hipsterbrown.component.rgb.v1.RgbService/Fill": grpclib.const.Handler(
+                self.Fill,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                rgb_pb2.FillRequest,
+                rgb_pb2.FillResponse,
+            ),
+            "/hipsterbrown.component.rgb.v1.RgbService/Clear": grpclib.const.Handler(
                 self.Clear,
                 grpclib.const.Cardinality.UNARY_UNARY,
                 rgb_pb2.ClearRequest,
                 rgb_pb2.ClearResponse,
             ),
-            '/hipsterbrown.component.rgb.v1.RgbService/Stop': grpclib.const.Handler(
+            "/hipsterbrown.component.rgb.v1.RgbService/Stop": grpclib.const.Handler(
                 self.Stop,
                 grpclib.const.Cardinality.UNARY_UNARY,
                 rgb_pb2.StopRequest,
@@ -51,23 +71,28 @@ class RgbServiceBase(abc.ABC):
 
 
 class RgbServiceStub:
-
     def __init__(self, channel: grpclib.client.Channel) -> None:
         self.Animate = grpclib.client.UnaryUnaryMethod(
             channel,
-            '/hipsterbrown.component.rgb.v1.RgbService/Animate',
+            "/hipsterbrown.component.rgb.v1.RgbService/Animate",
             rgb_pb2.AnimateRequest,
             rgb_pb2.AnimateResponse,
         )
+        self.Fill = grpclib.client.UnaryUnaryMethod(
+            channel,
+            "/hipsterbrown.component.rgb.v1.RgbService/Fill",
+            rgb_pb2.FillRequest,
+            rgb_pb2.FillResponse,
+        )
         self.Clear = grpclib.client.UnaryUnaryMethod(
             channel,
-            '/hipsterbrown.component.rgb.v1.RgbService/Clear',
+            "/hipsterbrown.component.rgb.v1.RgbService/Clear",
             rgb_pb2.ClearRequest,
             rgb_pb2.ClearResponse,
         )
         self.Stop = grpclib.client.UnaryUnaryMethod(
             channel,
-            '/hipsterbrown.component.rgb.v1.RgbService/Stop',
+            "/hipsterbrown.component.rgb.v1.RgbService/Stop",
             rgb_pb2.StopRequest,
             rgb_pb2.StopResponse,
         )

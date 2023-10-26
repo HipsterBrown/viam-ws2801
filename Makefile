@@ -10,4 +10,6 @@ upload:
 clean:
 	rm module.tar.gz
 
+build: buf-generate
+
 publish: bundle upload clean

@@ -45,6 +45,45 @@ class AnimateResponse(google.protobuf.message.Message):
 global___AnimateResponse = AnimateResponse
 
 @typing_extensions.final
+class FillRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    NAME_FIELD_NUMBER: builtins.int
+    RED_FIELD_NUMBER: builtins.int
+    GREEN_FIELD_NUMBER: builtins.int
+    BLUE_FIELD_NUMBER: builtins.int
+    name: builtins.str
+    red: builtins.int
+    green: builtins.int
+    blue: builtins.int
+    def __init__(
+        self,
+        *,
+        name: builtins.str = ...,
+        red: builtins.int = ...,
+        green: builtins.int = ...,
+        blue: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["blue", b"blue", "green", b"green", "name", b"name", "red", b"red"]) -> None: ...
+
+global___FillRequest = FillRequest
+
+@typing_extensions.final
+class FillResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    TEXT_FIELD_NUMBER: builtins.int
+    text: builtins.str
+    def __init__(
+        self,
+        *,
+        text: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["text", b"text"]) -> None: ...
+
+global___FillResponse = FillResponse
+
+@typing_extensions.final
 class ClearRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 

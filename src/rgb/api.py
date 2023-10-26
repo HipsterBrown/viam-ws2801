@@ -36,6 +36,8 @@ from .proto.rgb_grpc import RgbServiceBase, RgbServiceStub
 from .proto.rgb_pb2 import (
     AnimateRequest,
     AnimateResponse,
+    FillRequest,
+    FillResponse,
     ClearRequest,
     ClearResponse,
     StopRequest,
@@ -51,12 +53,17 @@ class Rgb(ComponentBase):
         ...
 
     @abc.abstractmethod
+    async def fill(self, red: int, green: int, blue: int) -> str:
+        ...
+
+    @abc.abstractmethod
     async def clear(self) -> str:
         ...
 
     @abc.abstractmethod
     async def stop(self) -> str:
         ...
+
 
 class RgbRPCService(RgbServiceBase, ResourceRPCServiceBase):
     """gRPC service for the Rgb Component"""
@@ -70,6 +77,14 @@ class RgbRPCService(RgbServiceBase, ResourceRPCServiceBase):
         rgb = self.get_resource(name)
         resp = await rgb.animate()
         await stream.send_message(AnimateResponse(text=resp))
+
+    async def Fill(self, stream: Stream[FillRequest, FillResponse]) -> None:
+        request = await stream.recv_message()
+        assert request is not None
+        name = request.name
+        rgb = self.get_resource(name)
+        resp = await rgb.fill(request.red, request.green, request.blue)
+        await stream.send_message(FillResponse(text=resp))
 
     async def Clear(self, stream: Stream[ClearRequest, ClearResponse]) -> None:
         request = await stream.recv_message()
@@ -87,6 +102,7 @@ class RgbRPCService(RgbServiceBase, ResourceRPCServiceBase):
         resp = await rgb.stop()
         await stream.send_message(StopResponse(text=resp))
 
+
 class RgbClient(Rgb):
     """gRPC client for the Rgb Component"""
 
@@ -100,6 +116,11 @@ class RgbClient(Rgb):
         response: AnimateResponse = await self.client.Animate(request)
         return response.text
 
+    async def fill(self, red: int, green: int, blue: int) -> str:
+        request = FillRequest(name=self.name, red=red, green=green, blue=blue)
+        response: FillResponse = await self.client.Fill(request)
+        return response.text
+
     async def clear(self) -> str:
         request = ClearRequest(name=self.name)
         response: ClearResponse = await self.client.Clear(request)
@@ -110,5 +131,7 @@ class RgbClient(Rgb):
         response: StopResponse = await self.client.Stop(request)
         return response.text
 
-    async def do_command(self, command: Mapping[str, ValueTypes], *, timeout: Optional[float] = None) -> Mapping[str, ValueTypes]:
+    async def do_command(
+        self, command: Mapping[str, ValueTypes], *, timeout: Optional[float] = None
+    ) -> Mapping[str, ValueTypes]:
         return await do_command(self.channel, self.name, command, timeout=timeout)

@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\trgb.proto\x12\x1dhipsterbrown.component.rgb.v1\x1a\x1cgoogle/api/annotations.proto\"$\n\x0e\x41nimateRequest\x12\x12\n\x04name\x18\x01 \x01(\tR\x04name\"%\n\x0f\x41nimateResponse\x12\x12\n\x04text\x18\x01 \x01(\tR\x04text\"\"\n\x0c\x43learRequest\x12\x12\n\x04name\x18\x01 \x01(\tR\x04name\"#\n\rClearResponse\x12\x12\n\x04text\x18\x01 \x01(\tR\x04text\"!\n\x0bStopRequest\x12\x12\n\x04name\x18\x01 \x01(\tR\x04name\"\"\n\x0cStopResponse\x12\x12\n\x04text\x18\x01 \x01(\tR\x04text2\xea\x03\n\nRgbService\x12\xa3\x01\n\x07\x41nimate\x12-.hipsterbrown.component.rgb.v1.AnimateRequest\x1a..hipsterbrown.component.rgb.v1.AnimateResponse\"9\x82\xd3\xe4\x93\x02\x33\"1/hipsterbrown/api/v1/component/rgb/{name}/animate\x12\x9b\x01\n\x05\x43lear\x12+.hipsterbrown.component.rgb.v1.ClearRequest\x1a,.hipsterbrown.component.rgb.v1.ClearResponse\"7\x82\xd3\xe4\x93\x02\x31\"//hipsterbrown/api/v1/component/rgb/{name}/clear\x12\x97\x01\n\x04Stop\x12*.hipsterbrown.component.rgb.v1.StopRequest\x1a+.hipsterbrown.component.rgb.v1.StopResponse\"6\x82\xd3\xe4\x93\x02\x30\"./hipsterbrown/api/v1/component/rgb/{name}/stopb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\trgb.proto\x12\x1dhipsterbrown.component.rgb.v1\x1a\x1cgoogle/api/annotations.proto\"$\n\x0e\x41nimateRequest\x12\x12\n\x04name\x18\x01 \x01(\tR\x04name\"%\n\x0f\x41nimateResponse\x12\x12\n\x04text\x18\x01 \x01(\tR\x04text\"]\n\x0b\x46illRequest\x12\x12\n\x04name\x18\x01 \x01(\tR\x04name\x12\x10\n\x03red\x18\x02 \x01(\x05R\x03red\x12\x14\n\x05green\x18\x03 \x01(\x05R\x05green\x12\x12\n\x04\x62lue\x18\x04 \x01(\x05R\x04\x62lue\"\"\n\x0c\x46illResponse\x12\x12\n\x04text\x18\x01 \x01(\tR\x04text\"\"\n\x0c\x43learRequest\x12\x12\n\x04name\x18\x01 \x01(\tR\x04name\"#\n\rClearResponse\x12\x12\n\x04text\x18\x01 \x01(\tR\x04text\"!\n\x0bStopRequest\x12\x12\n\x04name\x18\x01 \x01(\tR\x04name\"\"\n\x0cStopResponse\x12\x12\n\x04text\x18\x01 \x01(\tR\x04text2\x84\x05\n\nRgbService\x12\xa3\x01\n\x07\x41nimate\x12-.hipsterbrown.component.rgb.v1.AnimateRequest\x1a..hipsterbrown.component.rgb.v1.AnimateResponse\"9\x82\xd3\xe4\x93\x02\x33\"1/hipsterbrown/api/v1/component/rgb/{name}/animate\x12\x97\x01\n\x04\x46ill\x12*.hipsterbrown.component.rgb.v1.FillRequest\x1a+.hipsterbrown.component.rgb.v1.FillResponse\"6\x82\xd3\xe4\x93\x02\x30\"./hipsterbrown/api/v1/component/rgb/{name}/fill\x12\x9b\x01\n\x05\x43lear\x12+.hipsterbrown.component.rgb.v1.ClearRequest\x1a,.hipsterbrown.component.rgb.v1.ClearResponse\"7\x82\xd3\xe4\x93\x02\x31\"//hipsterbrown/api/v1/component/rgb/{name}/clear\x12\x97\x01\n\x04Stop\x12*.hipsterbrown.component.rgb.v1.StopRequest\x1a+.hipsterbrown.component.rgb.v1.StopResponse\"6\x82\xd3\xe4\x93\x02\x30\"./hipsterbrown/api/v1/component/rgb/{name}/stopb\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'rgb_pb2', globals())
@@ -23,6 +23,8 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
   _RGBSERVICE.methods_by_name['Animate']._options = None
   _RGBSERVICE.methods_by_name['Animate']._serialized_options = b'\202\323\344\223\0023\"1/hipsterbrown/api/v1/component/rgb/{name}/animate'
+  _RGBSERVICE.methods_by_name['Fill']._options = None
+  _RGBSERVICE.methods_by_name['Fill']._serialized_options = b'\202\323\344\223\0020\"./hipsterbrown/api/v1/component/rgb/{name}/fill'
   _RGBSERVICE.methods_by_name['Clear']._options = None
   _RGBSERVICE.methods_by_name['Clear']._serialized_options = b'\202\323\344\223\0021\"//hipsterbrown/api/v1/component/rgb/{name}/clear'
   _RGBSERVICE.methods_by_name['Stop']._options = None
@@ -31,14 +33,18 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _ANIMATEREQUEST._serialized_end=110
   _ANIMATERESPONSE._serialized_start=112
   _ANIMATERESPONSE._serialized_end=149
-  _CLEARREQUEST._serialized_start=151
-  _CLEARREQUEST._serialized_end=185
-  _CLEARRESPONSE._serialized_start=187
-  _CLEARRESPONSE._serialized_end=222
-  _STOPREQUEST._serialized_start=224
-  _STOPREQUEST._serialized_end=257
-  _STOPRESPONSE._serialized_start=259
-  _STOPRESPONSE._serialized_end=293
-  _RGBSERVICE._serialized_start=296
-  _RGBSERVICE._serialized_end=786
+  _FILLREQUEST._serialized_start=151
+  _FILLREQUEST._serialized_end=244
+  _FILLRESPONSE._serialized_start=246
+  _FILLRESPONSE._serialized_end=280
+  _CLEARREQUEST._serialized_start=282
+  _CLEARREQUEST._serialized_end=316
+  _CLEARRESPONSE._serialized_start=318
+  _CLEARRESPONSE._serialized_end=353
+  _STOPREQUEST._serialized_start=355
+  _STOPREQUEST._serialized_end=388
+  _STOPRESPONSE._serialized_start=390
+  _STOPRESPONSE._serialized_end=424
+  _RGBSERVICE._serialized_start=427
+  _RGBSERVICE._serialized_end=1071
 # @@protoc_insertion_point(module_scope)

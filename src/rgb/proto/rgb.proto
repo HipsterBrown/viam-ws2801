@@ -11,6 +11,12 @@ service RgbService {
     };
   }
 
+  rpc Fill(FillRequest) returns (FillResponse) {
+    option (google.api.http) = {
+      post: "/hipsterbrown/api/v1/component/rgb/{name}/fill"
+    };
+  }
+
   rpc Clear(ClearRequest) returns (ClearResponse) {
     option (google.api.http) = {
       post: "/hipsterbrown/api/v1/component/rgb/{name}/clear"
@@ -29,6 +35,17 @@ message AnimateRequest {
 }
 
 message AnimateResponse {
+  string text = 1;
+}
+
+message FillRequest {
+  string name = 1;
+  int32 red = 2;
+  int32 green = 3;
+  int32 blue = 4;
+}
+
+message FillResponse {
   string text = 1;
 }
 
