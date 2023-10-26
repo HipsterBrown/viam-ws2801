@@ -15,9 +15,10 @@ from viam.logging import getLogger
 
 LOGGER = getLogger(__name__)
 
+
 class ws2801(Rgb, Reconfigurable):
     MODEL: ClassVar[Model] = Model(ModelFamily("hipsterbrown", "led"), "ws2801")
-    
+
     animating: bool
     clock_pin: int
     data_pin: int
@@ -27,7 +28,9 @@ class ws2801(Rgb, Reconfigurable):
 
     # Constructor
     @classmethod
-    def new(cls, config: ComponentConfig, dependencies: Mapping[ResourceName, ResourceBase]) -> Self:
+    def new(
+        cls, config: ComponentConfig, dependencies: Mapping[ResourceName, ResourceBase]
+    ) -> Self:
         my_class = cls(config.name)
         my_class.reconfigure(config, dependencies)
         return my_class
@@ -50,19 +53,31 @@ class ws2801(Rgb, Reconfigurable):
         if led_count == "":
             raise Exception("led_count must be defined")
 
-        if isinstance(default_brightness, float) and (default_brightness > 1.0 or default_brightness < 0.0):
+        if isinstance(default_brightness, float) and (
+            default_brightness > 1.0 or default_brightness < 0.0
+        ):
             raise Exception("default_brightness must be between 0.0 and 1.0")
 
         return []
 
     # Handles attribute reconfiguration
-    def reconfigure(self, config: ComponentConfig, dependencies: Mapping[ResourceName, ResourceBase]):
+    def reconfigure(
+        self, config: ComponentConfig, dependencies: Mapping[ResourceName, ResourceBase]
+    ):
         self.animating = False
         self.clock_pin = int(config.attributes.fields["clock_pin"].number_value)
         self.data_pin = int(config.attributes.fields["data_pin"].number_value)
         self.led_count = int(config.attributes.fields["led_count"].number_value)
-        self.brightness = config.attributes.fields["default_brightness"].number_value or 1.0
-        self.controller = WS2801(self.clock_pin, self.data_pin, self.led_count, brightness=self.brightness, auto_write=False)
+        self.brightness = (
+            config.attributes.fields["default_brightness"].number_value or 1.0
+        )
+        self.controller = WS2801(
+            self.clock_pin,
+            self.data_pin,
+            self.led_count,
+            brightness=self.brightness,
+            auto_write=False,
+        )
 
         return
 
@@ -70,9 +85,14 @@ class ws2801(Rgb, Reconfigurable):
 
     async def animate(self) -> str:
         length = len(self.controller)
+        self.animating = True
         while self.animating:
             for index in range(length):
-                self.controller[index] = (self._random_color(), self._random_color(), self._random_color())
+                self.controller[index] = (
+                    self._random_color(),
+                    self._random_color(),
+                    self._random_color(),
+                )
 
             self.controller.show()
             await asyncio.sleep(0.15)
